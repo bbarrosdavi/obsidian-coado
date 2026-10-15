@@ -1,0 +1,9 @@
+/* Remove the left indent and border from all embedded notes */
+.markdown-embed {
+    border-left: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+.markdown-embed-content {
+    padding-left: 0 !important;
+}

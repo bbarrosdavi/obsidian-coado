@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app-bg do site no modo claro -->
+    <color name="coado_bg">#F4ECE1</color>
+    <!-- app-bg do modo noturno -->
+    <color name="coado_bg_dark">#1B1410</color>
+</resources>

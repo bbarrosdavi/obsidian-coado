@@ -1,0 +1,31 @@
+{
+  "attachmentFolderPath": "./Ω_Anexos",
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "propertiesInDocument": "hidden",
+  "showLineNumber": false,
+  "readableLineLength": false,
+  "showInlineTitle": false,
+  "showUnsupportedFiles": true,
+  "livePreview": true,
+  "newFileFolderPath": "/",
+  "userIgnoreFilters": [
+    "mecha-brain/"
+  ],
+  "promptDelete": false,
+  "trashOption": "none",
+  "openBehavior": "file:System/Home/Home",
+  "defaultViewMode": "preview",
+  "showIndentGuide": true,
+  "strictLineBreaks": true,
+  "tabSize": 4,
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 75
+  },
+  "spellcheck": false,
+  "foldHeading": true,
+  "settingsPopoutWindow": false
+}

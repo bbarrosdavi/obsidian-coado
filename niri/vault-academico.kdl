@@ -1,0 +1,16 @@
+// Gerado pelo plugin vaultAcademico do DMS: lugar, tamanho e vidro da janela.
+window-rule {
+    match title="^Acadêmico - Vault"
+    open-floating true
+    default-column-width { fixed 420; }
+    default-window-height { fixed 500; }
+    default-floating-position x=1075 y=140 relative-to="top-left"
+    geometry-corner-radius 14 14 14 14
+    clip-to-geometry true
+    focus-ring { off; }
+    border { off; }
+    sticky true
+    background-effect {
+        blur true
+    }
+}

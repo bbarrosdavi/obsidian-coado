@@ -1,0 +1,26 @@
+{
+  "name": "coado",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c yellow,magenta \"npm run dev -w @coado/api\" \"npm run dev -w @coado/web\"",
+    "build": "npm run build -w @coado/web && npm run build -w @coado/api",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint -w @coado/web",
+    "db:up": "docker compose -f compose.yaml -f compose.dev.yaml up -d db",
+    "db:migrate": "npm run migrate -w @coado/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "typescript": "~5.8.3",
+    "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

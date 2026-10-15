@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="channel_timer">Sessão em andamento</string>
+    <string name="channel_alerts">Fim de etapa</string>
+    <string name="timer_pause">Pausar</string>
+    <string name="timer_resume">Continuar</string>
+    <string name="timer_skip">Pular</string>
+    <string name="timer_finish">Finalizar</string>
+</resources>

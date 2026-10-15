@@ -1,0 +1,5 @@
+/* Wrap note and folder text in Files */
+.workspace-leaf-content[data-type=file-explorer] :is(.nav-file-title-content, .nav-folder-title-content) {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

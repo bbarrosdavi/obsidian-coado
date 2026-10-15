@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- a trilha do logo em uma cor só: ícone de notificação e da atividade em andamento -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.8"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M9,23c5,0 4,-6 7,-6s3,-6 7,-6" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M5.8,23a3.2,3.2 0 1,0 6.4,0a3.2,3.2 0 1,0 -6.4,0" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M19.8,11a3.2,3.2 0 1,0 6.4,0a3.2,3.2 0 1,0 -6.4,0" />
+</vector>

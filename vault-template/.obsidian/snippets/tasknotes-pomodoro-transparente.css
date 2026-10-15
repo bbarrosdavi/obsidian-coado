@@ -1,0 +1,5 @@
+/* O TaskNotes 4.13 pinta a visão do pomodoro com --tn-bg-primary (a cor de base do tema, opaca);
+   até a 4.1 ela era transparente e mostrava o painel translúcido do AnuPpuccin, como as outras visões. */
+.tasknotes-plugin.pomodoro-view {
+    background: transparent;
+}

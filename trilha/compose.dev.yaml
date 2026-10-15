@@ -1,0 +1,8 @@
+# Desenvolvimento local: publica o Postgres em 127.0.0.1 para `npm run dev` usar.
+#   npm run db:up   (= docker compose -f compose.yaml -f compose.dev.yaml up -d db)
+services:
+  db:
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    # rede interna não aceita porta publicada; em dev o banco também entra na rede comum
+    networks: [backend, frontend]

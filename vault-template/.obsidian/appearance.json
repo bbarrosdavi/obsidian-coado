@@ -1,0 +1,25 @@
+{
+  "cssTheme": "AnuPpuccin",
+  "enabledCssSnippets": [
+    "journal-theme",
+    "MCL Multi Column",
+    "filename",
+    "justify",
+    "MCL Gallery Cards",
+    "aligntext",
+    "mermaid-pdf",
+    "clean-embeds",
+    "CenterImage",
+    "heading-center",
+    "readable-line-plus15",
+    "tasknotes-pomodoro-transparente"
+  ],
+  "accentColor": "",
+  "interfaceFontFamily": "ComicShannsMono Nerd Font",
+  "textFontFamily": "",
+  "baseFontSize": 17,
+  "showRibbon": false,
+  "theme": "obsidian",
+  "baseFontSizeAction": true,
+  "nativeMenus": false
+}

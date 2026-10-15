@@ -1,0 +1,17 @@
+{
+  "name": "@coado/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Modelo de dados, validação e protocolo de sincronização compartilhados entre web e api",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  }
+}

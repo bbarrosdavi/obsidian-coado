@@ -1,0 +1,89 @@
+# Coado: web (nginx + SPA) → api (Fastify) → db (Postgres).
+# O banco fica numa rede interna, sem saída e sem porta publicada; só a web é exposta.
+#
+#   cp .env.example .env   # preencha POSTGRES_PASSWORD, SESSION_SECRET e o Google
+#   docker compose up -d --build
+
+name: coado
+
+x-api-build: &api-build
+  context: .
+  dockerfile: apps/api/Dockerfile
+
+x-api-env: &api-env
+  NODE_ENV: ${NODE_ENV:-production}
+  DATABASE_URL: postgres://${POSTGRES_USER:-coado}:${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}@db:5432/${POSTGRES_DB:-coado}
+  LOG_LEVEL: ${LOG_LEVEL:-info}
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-coado}
+      POSTGRES_USER: ${POSTGRES_USER:-coado}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [backend]
+
+  # aplica as migrações e encerra; a api só sobe depois que ele termina bem
+  migrate:
+    build: *api-build
+    image: coado-api:latest
+    command: ["node", "dist/migrate.js"]
+    environment: *api-env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    networks: [backend]
+
+  api:
+    build: *api-build
+    image: coado-api:latest
+    restart: unless-stopped
+    environment:
+      <<: *api-env
+      APP_URL: ${PUBLIC_URL:-http://localhost:8080}
+      SESSION_SECRET: ${SESSION_SECRET:?defina SESSION_SECRET no .env}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      UPLOAD_MAX_FILE_MB: ${UPLOAD_MAX_FILE_MB:-25}
+      UPLOAD_QUOTA_MB: ${UPLOAD_QUOTA_MB:-500}
+      AUTH_DEV_LOGIN: ${AUTH_DEV_LOGIN:-false}
+      TRUST_PROXY: "true"
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    # backend: fala com o banco · frontend: recebe da web e sai para o Google (OAuth)
+    networks: [backend, frontend]
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    image: coado-web:latest
+    restart: unless-stopped
+    ports:
+      - "${COADO_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [frontend]
+
+networks:
+  backend:
+    internal: true
+  frontend: {}
+
+volumes:
+  pgdata:
+  uploads:

@@ -1,0 +1,30 @@
+filters:
+  and:
+    - note.categories.contains(link("Receitas"))
+    - '!file.name.contains("Template")'
+properties:
+  file.name:
+    displayName: Nome
+  note.author:
+    displayName: Autor
+  note.type:
+    displayName: Tipo
+  note.ingredients:
+    displayName: Ingredientes
+  note.cuisine:
+    displayName: Cozinha
+  note.rating:
+    displayName: Avaliação
+views:
+  - type: cards
+    name: Receitas
+    order:
+      - file.name
+      - type
+      - cuisine
+      - author
+      - ingredients
+      - rating
+    columnSize:
+      note.type: 201
+      note.cuisine: 174

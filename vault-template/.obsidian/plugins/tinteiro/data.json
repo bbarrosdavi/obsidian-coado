@@ -1,0 +1,43 @@
+{
+  "activePen": "fountain",
+  "color": "#2f9e44",
+  "penSizes": {
+    "fountain": 5.5,
+    "ballpoint": 3,
+    "pencil": 3.5,
+    "marker": 8
+  },
+  "recentColors": [
+    "#000000"
+  ],
+  "pressureCurve": null,
+  "drawingLayout": "dot",
+  "writingLayout": "dot",
+  "dotDensity": "medium",
+  "canvasTheme": "light",
+  "eraserMode": "ink",
+  "eraserSize": 9.5,
+  "zoomLocked": true,
+  "dominantHand": "right",
+  "toolbarPlacement": "left",
+  "toolbarSwatches": true,
+  "toolbarScale": 1,
+  "strokePrediction": true,
+  "penCursor": "dot",
+  "fingerDrawing": false,
+  "strokeInputTreatAs": "auto",
+  "writingEnabled": true,
+  "drawingEnabled": true,
+  "writingLineHeight": 150,
+  "writingBufferLines": 5,
+  "writingLinesWhenLocked": true,
+  "writingBackgroundWhenLocked": true,
+  "drawingGridEnabledByDefault": true,
+  "drawingFrameWhenLocked": true,
+  "drawingBackgroundWhenLocked": true,
+  "customAttachmentFolders": false,
+  "noteAttachmentFolderLocation": "obsidian",
+  "notelessAttachmentFolderLocation": "obsidian",
+  "writingSubfolder": "Ink/Writing",
+  "drawingSubfolder": "Ink/Drawing"
+}

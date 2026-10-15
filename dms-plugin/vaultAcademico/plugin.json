@@ -1,0 +1,25 @@
+{
+  "id": "vaultAcademico",
+  "name": "Acadêmico - Vault",
+  "description": "Widget desktop e pill na barra do novo sistema acadêmico da vault (ciclo de estudos, metas, constância, revisões, Anki e prazos)",
+  "version": "1.0.0",
+  "author": "Davi",
+  "icon": "school",
+  "type": "composite",
+  "capabilities": [
+    "dankbar-widget",
+    "desktop-widget",
+    "daemon"
+  ],
+  "components": {
+    "daemon": "./AcademicoDaemon.qml",
+    "widget": "./AcademicoBarWidget.qml",
+    "desktop": "./AcademicoDesktopWidget.qml"
+  },
+  "settings": "./AcademicoSettings.qml",
+  "requires_dms": ">=1.5.0",
+  "permissions": [
+    "settings_read",
+    "settings_write"
+  ]
+}

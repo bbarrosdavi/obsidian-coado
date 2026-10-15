@@ -1,0 +1,17 @@
+filters:
+  and:
+    - file.folder.contains("System/Inbox")
+properties:
+  file.name:
+    displayName: Nome
+  file.cday:
+    displayName: Criado em
+  file.mday:
+    displayName: Modificado em
+views:
+  - type: table
+    name: Caixa de Entrada
+    order:
+      - file.mday
+      - file.name
+      - file.cday

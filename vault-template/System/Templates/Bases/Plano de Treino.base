@@ -1,0 +1,7 @@
+filters:
+  and:
+    - '!file.name.contains("Template")'
+    - categories.contains("Plano de Treino")
+views:
+  - type: table
+    name: Tabela

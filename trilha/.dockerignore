@@ -1,0 +1,14 @@
+# contexto de build = raiz do monorepo (web e api compartilham packages/shared)
+.git
+.claude
+**/node_modules
+**/dist
+**/.tmp
+**/*.log
+.env
+.env.*
+!.env.example
+apps/api/data
+apps/web/.dockerignore
+# apps nativos: projeto Gradle, não entra nas imagens
+apps/android

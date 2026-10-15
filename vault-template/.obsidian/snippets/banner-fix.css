@@ -1,0 +1,14 @@
+﻿/* Fix gap below banner in Live Preview & Reading Mode */
+.obsidian-banner-wrapper {
+    margin-bottom: -30px !important;  /* Adjust this number to close the gap */
+}
+
+/* Optional: Pull the title closer if you use Inline Titles */
+.inline-title {
+    margin-top: 10px !important;
+}
+
+/* Specific fix for your Dashboard if the above isn't enough */
+.dashboard .obsidian-banner-wrapper {
+    margin-bottom: -200px !important; /* more aggressive pull for dashboards */
+}

@@ -1,0 +1,10 @@
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+trilha/apps/android/.gradle/
+trilha/apps/android/build/
+trilha/apps/android/*/build/
+trilha/apps/android/local.properties
+bridge/*.env
+!bridge/coado.env.example

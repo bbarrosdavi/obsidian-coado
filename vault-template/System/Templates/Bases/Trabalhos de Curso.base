@@ -1,0 +1,225 @@
+filters:
+  and:
+    - categories.contains(link("Trabalhos Curso"))
+    - '!file.name.contains("Template")'
+properties:
+  file.name:
+    displayName: Título
+  note.class:
+    displayName: Disciplina
+  note.type:
+    displayName: Tipo
+  note.due_date:
+    displayName: Entrega
+  note.assigned:
+    displayName: Atribuído
+  note.status:
+    displayName: Status
+  note.nota:
+    displayName: Nota
+  note.topics:
+    displayName: Tópicos
+views:
+  - type: table
+    name: Em Breve
+    filters:
+      and:
+        - "!due_date.isEmpty()"
+        - date(due_date) >= today()
+        - '!list(status).contains("done")'
+        - '!list(status).contains("done")'
+        - '!list(status).contains("done")'
+    order:
+      - file.name
+      - class
+      - type
+      - due_date
+      - status
+    sort:
+      - property: due_date
+        direction: ASC
+    limit: 20
+    columnSize:
+      file.name: 250
+      note.class: 150
+      note.due_date: 100
+  - type: table
+    name: Atrasados
+    filters:
+      and:
+        - "!due_date.isEmpty()"
+        - date(due_date) < today()
+        - '!list(status).contains("done")'
+        - '!list(status).contains("done")'
+        - '!list(status).contains("done")'
+    order:
+      - file.name
+      - class
+      - type
+      - due_date
+      - status
+    sort:
+      - property: due_date
+        direction: ASC
+    columnSize:
+      file.name: 250
+      note.class: 150
+      note.due_date: 100
+  - type: table
+    name: Todos os Trabalhos
+    order:
+      - file.name
+      - class
+      - type
+      - due_date
+      - status
+      - nota
+    sort:
+      - property: due_date
+        direction: DESC
+    columnSize:
+      file.name: 250
+      note.class: 150
+  - type: table
+    name: Por Disciplina
+    filters:
+      and:
+        - list(class).contains(this)
+    order:
+      - file.name
+      - type
+      - due_date
+      - status
+      - nota
+    sort:
+      - property: due_date
+        direction: DESC
+    columnSize:
+      file.name: 250
+      note.type: 100
+  - type: table
+    name: Por Tipo
+    order:
+      - type
+      - file.name
+      - class
+      - due_date
+      - status
+    sort:
+      - property: type
+        direction: ASC
+      - property: due_date
+        direction: DESC
+    columnSize:
+      note.type: 100
+      file.name: 230
+  - type: table
+    name: Tarefas
+    filters:
+      or:
+        - list(type).contains("tarefa")
+        - list(type).contains("trabalho")
+        - list(type).contains("assignment")
+    order:
+      - file.name
+      - class
+      - due_date
+      - status
+      - nota
+    sort:
+      - property: due_date
+        direction: DESC
+    columnSize:
+      file.name: 250
+      note.class: 150
+  - type: table
+    name: Exames
+    filters:
+      and:
+        - or:
+            - list(type).contains("exame")
+            - list(type).contains("exam")
+            - list(type).contains("quiz")
+            - list(type).contains("midterm")
+            - list(type).contains("final")
+    order:
+      - file.name
+      - class
+      - due_date
+      - status
+      - nota
+    sort:
+      - property: due_date
+        direction: DESC
+    columnSize:
+      file.name: 250
+      note.class: 150
+  - type: table
+    name: Projetos
+    filters:
+      or:
+        - list(type).contains("projeto")
+        - list(type).contains("project")
+    order:
+      - file.name
+      - class
+      - due_date
+      - status
+      - nota
+    sort:
+      - property: due_date
+        direction: DESC
+    columnSize:
+      file.name: 250
+      note.class: 150
+  - type: table
+    name: Avaliados
+    filters:
+      and:
+        - "!nota.isEmpty()"
+    order:
+      - file.name
+      - class
+      - type
+      - due_date
+      - nota
+    sort:
+      - property: due_date
+        direction: DESC
+    columnSize:
+      file.name: 250
+      note.class: 150
+      note.nota: 80
+  - type: table
+    name: Não Iniciado
+    filters:
+      and:
+        - list(status).contains("none")
+    order:
+      - file.name
+      - class
+      - type
+      - due_date
+    sort:
+      - property: due_date
+        direction: ASC
+    columnSize:
+      file.name: 250
+      note.class: 150
+  - type: table
+    name: Em Andamento
+    filters:
+      and:
+        - list(status).contains("in-progress")
+    order:
+      - file.name
+      - class
+      - type
+      - due_date
+      - status
+    sort:
+      - property: due_date
+        direction: ASC
+    columnSize:
+      file.name: 250
+      note.class: 150

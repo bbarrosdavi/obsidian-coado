@@ -1,0 +1,16 @@
+
+
+/* Align image to the right */
+div[src$="#right"], span[src$="#right"] {
+   text-align: right;
+}
+
+/* Align image to the center */
+div[src$="#center"], span[src$="#center"] {
+   text-align: center;
+}
+
+/* Align image to the left */
+div[src$="#left"], span[src$="#left"] {
+   text-align: left;
+}

@@ -1,0 +1,113 @@
+filters:
+  and:
+    - categories.contains(link("Disciplinas"))
+    - '!file.name.contains("Template")'
+properties:
+  file.name:
+    displayName: Disciplina
+  note.codigo:
+    displayName: Código
+  note.semestre:
+    displayName: Semestre
+  note.professor:
+    displayName: Professor
+  note.status:
+    displayName: Status
+  note.nota:
+    displayName: Nota
+  note.creditos:
+    displayName: Créditos
+  note.year:
+    displayName: Ano
+views:
+  - type: table
+    name: Abertas
+    filters:
+      or:
+        - list(status).contains("open")
+        - list(status).contains("in-progress")
+    order:
+      - file.name
+      - codigo
+      - professor
+      - semestre
+      - creditos
+    sort:
+      - property: semestre
+        direction: DESC
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 250
+      note.codigo: 100
+      note.semestre: 120
+  - type: table
+    name: Todas as Disciplinas
+    order:
+      - file.name
+      - codigo
+      - semestre
+      - status
+      - nota
+      - professor
+      - creditos
+    sort:
+      - property: semestre
+        direction: DESC
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 250
+      note.codigo: 100
+  - type: table
+    name: Por Semestre
+    order:
+      - semestre
+      - file.name
+      - codigo
+      - status
+      - nota
+      - creditos
+    sort:
+      - property: semestre
+        direction: ASC
+      - property: file.name
+        direction: ASC
+    columnSize:
+      note.semestre: 120
+      file.name: 230
+  - type: table
+    name: Concluídas
+    filters:
+      and:
+        - list(status).contains("done")
+    order:
+      - file.name
+      - semestre
+      - nota
+      - professor
+      - creditos
+    sort:
+      - property: semestre
+        direction: DESC
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 250
+      note.nota: 80
+  - type: table
+    name: Por Professor
+    order:
+      - professor
+      - file.name
+      - semestre
+      - codigo
+      - status
+    sort:
+      - property: professor
+        direction: ASC
+      - property: semestre
+        direction: DESC
+    columnSize:
+      note.professor: 150
+      file.name: 200

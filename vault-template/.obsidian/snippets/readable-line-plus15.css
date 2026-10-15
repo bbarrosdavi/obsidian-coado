@@ -1,0 +1,20 @@
+/* Readable line length +20%.
+   Recalcula a variável no view (filho), não no mesmo elemento que a define.
+   Só aumentar max-width do sizer alarga o box e desloca o texto; o wrap
+   continua em --file-line-width. */
+body {
+  --file-line-width-boosted: calc(var(--file-line-width) * 1.20);
+}
+
+.markdown-source-view.mod-cm6.is-readable-line-width:not(.wide-page),
+.markdown-preview-view.is-readable-line-width:not(.wide-page) {
+  --file-line-width: var(--file-line-width-boosted);
+}
+
+/* Homes (notas com cssclass wide-page) ignoram o readable line length:
+   largura total mesmo com a opção ligada. O snippet MCL Wide Views, que
+   fazia isso, não está ativo. */
+body .markdown-source-view.wide-page,
+body .markdown-preview-view.wide-page {
+  --file-line-width: 100%;
+}

@@ -1,0 +1,9 @@
+{
+  "new-card-insertion-method": "prepend",
+  "show-checkboxes": true,
+  "new-line-trigger": "enter",
+  "date-format": "DD-MM-YY",
+  "show-relative-date": true,
+  "archive-with-date": true,
+  "date-display-format": "DD-MM-YY"
+}
