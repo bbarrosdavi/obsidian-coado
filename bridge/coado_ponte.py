@@ -235,7 +235,8 @@ class Vault:
         return sorted(out, key=lambda d: d["cod"])
 
     def caminho_razao(self, d, semestre):
-        return os.path.join(d["pasta"], f"{d['cod']} Estudo {semestre}.md")
+        """Tarefa de estudo geral da disciplina (TaskNotes, com project: da disciplina)."""
+        return os.path.join(d["pasta"], f"{d['cod']} Estudo geral.md")
 
     def caminho_estado(self, semestre):
         return os.path.join(self.acad, "Semestres", f"{semestre} Estudo.md")
@@ -530,7 +531,9 @@ def planejamento_da_vault(p):
             "subjects": sorted([{"s": str(x["codigo"]).lower(), "imp": float(x["importancia"]), "know": float(x["conhecimento"])}
                                 for x in p.get("disciplinas", [])], key=lambda x: x["s"]),
             "cycle": [{"id": str(x["id"]), "s": str(x["codigo"]).lower(), "dur": int(x["minutos"])} for x in p.get("ciclo", [])],
-            "completed": int(p.get("ciclos_completos", 0)), "started": str(p.get("inicio_ciclo"))}
+            "completed": int(p.get("ciclos_completos", 0)), "started": str(p.get("inicio_ciclo")),
+            # modo semanal: empurrar a sessão não feita para o dia seguinte (config.carryOver do Coado; ausente = ligado)
+            "carryOver": bool(p.get("empurrar_atrasados", True))}
 
 
 def planejamento_do_coado(p):
@@ -542,7 +545,7 @@ def planejamento_do_coado(p):
             "subjects": sorted([{"s": x["subjectId"], "imp": float(x["importance"]), "know": float(x["knowledge"])} for x in c["subjects"]],
                                key=lambda x: x["s"]),
             "cycle": [{"id": x["id"], "s": x["subjectId"], "dur": x["duration"]} for x in p["cycle"]],
-            "completed": p["completedCycles"], "started": p["cycleStartedAt"]}
+            "completed": p["completedCycles"], "started": p["cycleStartedAt"], "carryOver": bool(c.get("carryOver", True))}
 
 
 def num(v):
@@ -554,13 +557,14 @@ def planejamento_para_vault(c):
             "sessao_min": c["minSession"], "sessao_max": c["maxSession"],
             "disciplinas": [{"codigo": x["s"].upper(), "importancia": num(x["imp"]), "conhecimento": num(x["know"])} for x in c["subjects"]],
             "ciclo": [{"id": x["id"], "codigo": x["s"].upper(), "minutos": x["dur"]} for x in c["cycle"]],
-            "ciclos_completos": c["completed"], "inicio_ciclo": c["started"]}
+            "ciclos_completos": c["completed"], "inicio_ciclo": c["started"], "empurrar_atrasados": c.get("carryOver", True)}
 
 
 def planejamento_para_coado(c, plano):
     return {"planId": plano, "type": c["type"],
             "config": {"weeklyMinutes": c["weeklyMinutes"], "days": c["days"], "minSession": c["minSession"], "maxSession": c["maxSession"],
-                       "subjects": [{"subjectId": x["s"], "importance": x["imp"], "knowledge": x["know"]} for x in c["subjects"]]},
+                       "subjects": [{"subjectId": x["s"], "importance": x["imp"], "knowledge": x["know"]} for x in c["subjects"]],
+                       "carryOver": c.get("carryOver", True)},
             "cycle": [{"id": x["id"], "subjectId": x["s"], "duration": x["dur"]} for x in c["cycle"]],
             "completedCycles": c["completed"], "cycleStartedAt": c["started"]}
 
@@ -664,11 +668,17 @@ return <PainelEstudo />;
 """
 
 
+def corpo_estudo_geral(d):
+    return (f"\n# {d['cod']} · Estudo geral\n\nTarefa do TaskNotes para estudar [[{d['nome']}]] quando não é uma entrega específica. "
+            "Escolha esta tarefa no pomodoro: o tempo fica aqui e soma no projeto da disciplina nas estatísticas do TaskNotes.\n")
+
+
 def nova_razao(d, semestre):
     hoje = dt.datetime.now(TZ).strftime("%Y-%m-%d")
-    fm = {"tags": ["tipo/task", "academico"], "class": f"[[{d['nome']}]]", "type": "tarefa", "status": "in-progress",
-          "priority": d["prioridade"], "due_date": d["fim"], "created": hoje, "coado_disciplina": d["id"], "timeEntries": []}
-    corpo = f"\n# {d['cod']}: estudo do semestre {semestre}\n\nCada sessão de estudo da disciplina é uma entrada de tempo desta nota, venha do pomodoro, do relógio ou do Coado.\n"
+    fm = {"tags": ["tipo/task", "academico"], "class": f"[[{d['nome']}]]", "project": [f"[[{d['nome']}]]"], "type": "tarefa",
+          "status": "in-progress", "priority": d["prioridade"], "due_date": d["fim"], "created": hoje, "coado_disciplina": d["id"],
+          "timeEntries": []}
+    corpo = corpo_estudo_geral(d)
     return fm, corpo
 
 
